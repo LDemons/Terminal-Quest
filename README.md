@@ -44,6 +44,7 @@ src/
 - `projects`
 - `open <app>`
 - `theme <mode>`
+- `color <verde|magenta|cian|ambar>`
 - `toggle scanlines`
 - `clear`
 
@@ -78,10 +79,12 @@ Abrí: `http://localhost:3000`
 2. Ejecutá `help` y verificá listado de comandos.
 3. Ejecutá `about`, `skills`, `projects`.
 4. Ejecutá `theme glitch`, luego `theme clean`, luego `theme crt`.
-5. Ejecutá `toggle scanlines` dos veces (on/off).
-6. Ejecutá `open spotify-dungeon`.
-7. Ejecutá `clear` y verificá que limpia historial.
-8. Ejecutá un comando inválido, por ejemplo `foobar`, y verificá mensaje de error.
+5. Ejecutá `color magenta`, luego `color verde`.
+6. Ejecutá `toggle scanlines` dos veces (on/off).
+7. Ejecutá `open spotify-dungeon`.
+8. Ejecutá `clear` y verificá que limpia historial.
+9. Ejecutá un comando inválido, por ejemplo `foobar`, y verificá mensaje de error.
+10. Probá autocompletado con `TAB` y navegación de historial con `↑`/`↓`.
 
 ### 5) Build de producción
 

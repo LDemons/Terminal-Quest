@@ -3,7 +3,7 @@ import { create } from "zustand";
 import { appRegistry } from "@/apps/registry";
 import { runCommand } from "@/core/commands/registry";
 import { parseCommand } from "@/core/terminal/parser";
-import type { CommandContext, ThemeMode } from "@/core/terminal/types";
+import type { CommandContext, TerminalColor, ThemeMode } from "@/core/terminal/types";
 
 type TerminalLine = {
   id: string;
@@ -14,10 +14,12 @@ type TerminalLine = {
 type ShellState = {
   booted: boolean;
   theme: ThemeMode;
+  color: TerminalColor;
   scanlines: boolean;
   lines: TerminalLine[];
   markBooted: () => void;
   setTheme: (theme: ThemeMode) => void;
+  setColor: (color: TerminalColor) => void;
   toggleScanlines: () => void;
   clear: () => void;
   pushInput: (value: string) => void;
@@ -27,7 +29,7 @@ type ShellState = {
 
 const initialLines: TerminalLine[] = [
   { id: "welcome-1", text: "TerminalQuest OS v0.1", kind: "system" },
-  { id: "welcome-2", text: "Type 'help' to begin your quest.", kind: "system" },
+  { id: "welcome-2", text: "Escribe 'help' para comenzar tu quest.", kind: "system" },
 ];
 
 const lineId = () => `${Date.now()}-${Math.random().toString(16).slice(2)}`;
@@ -35,10 +37,12 @@ const lineId = () => `${Date.now()}-${Math.random().toString(16).slice(2)}`;
 export const useShellStore = create<ShellState>((set, get) => ({
   booted: false,
   theme: "crt",
+  color: "verde",
   scanlines: true,
   lines: initialLines,
   markBooted: () => set({ booted: true }),
   setTheme: (theme) => set({ theme }),
+  setColor: (color) => set({ color }),
   toggleScanlines: () => set((state) => ({ scanlines: !state.scanlines })),
   clear: () => set({ lines: [] }),
   pushInput: (value) =>
@@ -69,6 +73,8 @@ export const useShellStore = create<ShellState>((set, get) => ({
     const context: CommandContext = {
       currentTheme: get().theme,
       setTheme: get().setTheme,
+      currentColor: get().color,
+      setColor: get().setColor,
       isScanlinesEnabled: get().scanlines,
       toggleScanlines: get().toggleScanlines,
       clearScreen: get().clear,

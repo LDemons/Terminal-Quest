@@ -7,11 +7,11 @@ type BootScreenProps = {
 };
 
 const bootLines = [
-  "[ OK ] Initializing TerminalQuest Kernel",
-  "[ OK ] Mounting /shell",
-  "[ OK ] Loading command registry",
-  "[ OK ] Activating neon renderer",
-  "[DONE] Boot sequence complete",
+  "[ OK ] Inicializando kernel de TerminalQuest",
+  "[ OK ] Montando /shell",
+  "[ OK ] Cargando registro de comandos",
+  "[ OK ] Activando renderizador neón",
+  "[DONE] Secuencia de arranque completada",
 ];
 
 export function BootScreen({ onComplete }: BootScreenProps) {

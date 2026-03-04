@@ -1,8 +1,14 @@
 import { appRegistry } from "@/apps/registry";
 import { aboutLines, projectLines, skillLines } from "@/content/profile";
-import type { CommandContext, TerminalCommand, ThemeMode } from "@/core/terminal/types";
+import type {
+  CommandContext,
+  TerminalColor,
+  TerminalCommand,
+  ThemeMode,
+} from "@/core/terminal/types";
 
-const themeModes: ThemeMode[] = ["crt", "glitch", "clean"];
+export const THEME_MODES: ThemeMode[] = ["crt", "glitch", "clean"];
+export const TERMINAL_COLORS: TerminalColor[] = ["verde", "magenta", "cian", "ambar"];
 
 export const commandRegistry: TerminalCommand[] = [
   {
@@ -18,6 +24,7 @@ export const commandRegistry: TerminalCommand[] = [
         "- projects",
         "- open <app>",
         "- theme <mode>",
+        "- color <verde|magenta|cian|ambar>",
         "- toggle scanlines",
         "- clear",
       ],
@@ -64,10 +71,10 @@ export const commandRegistry: TerminalCommand[] = [
     execute: (args, context) => {
       const selected = args[0]?.toLowerCase() as ThemeMode | undefined;
 
-      if (!selected || !themeModes.includes(selected)) {
+      if (!selected || !THEME_MODES.includes(selected)) {
         return {
           output: [
-            `Theme actual: ${context.currentTheme}`,
+            `Tema actual: ${context.currentTheme}`,
             "Uso: theme <crt|glitch|clean>",
           ],
         };
@@ -75,6 +82,26 @@ export const commandRegistry: TerminalCommand[] = [
 
       context.setTheme(selected);
       return { output: [`Tema cambiado a '${selected}'.`] };
+    },
+  },
+  {
+    name: "color",
+    description: "Cambia el color principal de la terminal.",
+    usage: "color <verde|magenta|cian|ambar>",
+    execute: (args, context) => {
+      const selected = args[0]?.toLowerCase() as TerminalColor | undefined;
+
+      if (!selected || !TERMINAL_COLORS.includes(selected)) {
+        return {
+          output: [
+            `Color actual: ${context.currentColor}`,
+            "Uso: color <verde|magenta|cian|ambar>",
+          ],
+        };
+      }
+
+      context.setColor(selected);
+      return { output: [`Color cambiado a '${selected}'.`] };
     },
   },
   {
@@ -134,4 +161,8 @@ export function runCommand(input: string, args: string[], context: CommandContex
 
 export function getAppCatalog() {
   return Object.values(appRegistry).map((app) => `${app.id} :: ${app.description}`);
+}
+
+export function getCommandNames() {
+  return commandRegistry.map((command) => command.name);
 }

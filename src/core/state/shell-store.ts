@@ -81,9 +81,9 @@ export const useShellStore = create<ShellState>((set, get) => ({
       openApp: (appId: string) => {
         const app = appRegistry[appId];
         if (!app) {
-          return `App '${appId}' no encontrada.`;
+          return [`App '${appId}' no encontrada.`];
         }
-        return app.launchMessage;
+        return app.getLaunchMessage();
       },
     };
 

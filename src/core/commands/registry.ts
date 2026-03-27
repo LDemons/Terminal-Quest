@@ -60,7 +60,7 @@ export const commandRegistry: TerminalCommand[] = [
       }
 
       return {
-        output: [context.openApp(appId)],
+        output: context.openApp(appId),
       };
     },
   },

@@ -10,7 +10,7 @@ export type CommandContext = {
   isScanlinesEnabled: boolean;
   toggleScanlines: () => void;
   clearScreen: () => void;
-  openApp: (appId: string) => string;
+  openApp: (appId: string) => string[];
 };
 
 export type CommandResult = {
